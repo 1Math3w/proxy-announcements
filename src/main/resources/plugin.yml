@@ -2,3 +2,7 @@ name: ProxyAnnouncements
 main: me.math3w.proxyannouncements.ProxyAnnouncements
 version: 1.0
 author: _Math3w_
+commands:
+  announce:
+    description: Force announcement
+    permission: bungeecord.command.announce
