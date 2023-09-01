@@ -4,10 +4,7 @@ import me.math3w.proxyannouncements.ProxyAnnouncements;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.config.Configuration;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class AnnouncementManager {
@@ -25,8 +22,10 @@ public class AnnouncementManager {
         this.random = random;
         this.servers = servers.contains("*") ? proxyAnnouncements.getProxy().getServers().keySet() : servers;
 
+        Random randomObject = new Random();
         proxyAnnouncements.getProxy().getScheduler().schedule(proxyAnnouncements, () -> {
-            Announcement announcement = announcements.get(currentAnnouncement);
+            int announcementIndex = random ? randomObject.nextInt(announcements.size()) : currentAnnouncement;
+            Announcement announcement = announcements.get(announcementIndex);
 
             sendAnnouncement(announcement);
 
