@@ -1,0 +1,4 @@
+# If true announcements will be sent in a random order
+random: false
+# Seconds between each announcement
+interval: 60

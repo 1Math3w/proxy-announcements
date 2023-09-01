@@ -1,0 +1,8 @@
+test1:
+  # Content of announcement
+  lines:
+    - "&7Proxy Announcement 1"
+test2:
+  # Content of announcement
+  lines:
+    - "&7Proxy Announcement 2"
