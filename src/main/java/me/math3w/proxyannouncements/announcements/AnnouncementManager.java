@@ -2,6 +2,7 @@ package me.math3w.proxyannouncements.announcements;
 
 import me.math3w.proxyannouncements.ProxyAnnouncements;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.scheduler.ScheduledTask;
 import net.md_5.bungee.config.Configuration;
 
 import java.util.*;
@@ -13,6 +14,7 @@ public class AnnouncementManager {
     private final int interval;
     private final boolean random;
     private final Set<String> servers;
+    private final ScheduledTask scheduledTask;
     private int currentAnnouncement = 0;
 
     public AnnouncementManager(ProxyAnnouncements proxyAnnouncements, List<Announcement> announcements, int interval, boolean random, Set<String> servers) {
@@ -23,7 +25,7 @@ public class AnnouncementManager {
         this.servers = servers.contains("*") ? proxyAnnouncements.getProxy().getServers().keySet() : servers;
 
         Random randomObject = new Random();
-        proxyAnnouncements.getProxy().getScheduler().schedule(proxyAnnouncements, () -> {
+        scheduledTask = proxyAnnouncements.getProxy().getScheduler().schedule(proxyAnnouncements, () -> {
             int announcementIndex = random ? randomObject.nextInt(announcements.size()) : currentAnnouncement;
             Announcement announcement = announcements.get(announcementIndex);
 
@@ -56,6 +58,10 @@ public class AnnouncementManager {
 
     public Optional<Announcement> getAnnouncement(String name) {
         return announcements.stream().filter(announcement -> announcement.getName().equals(name)).findAny();
+    }
+
+    public void stopScheduler() {
+        scheduledTask.cancel();
     }
 
     public List<Announcement> getAnnouncements() {

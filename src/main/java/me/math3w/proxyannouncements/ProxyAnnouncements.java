@@ -2,6 +2,7 @@ package me.math3w.proxyannouncements;
 
 import me.math3w.proxyannouncements.announcements.AnnouncementManager;
 import me.math3w.proxyannouncements.commands.AnnounceCommand;
+import me.math3w.proxyannouncements.commands.AnnouncementsCommand;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -20,10 +21,26 @@ public class ProxyAnnouncements extends Plugin {
     @Override
     public void onEnable() {
         getProxy().getPluginManager().registerCommand(this, new AnnounceCommand(this));
+        getProxy().getPluginManager().registerCommand(this, new AnnouncementsCommand(this));
+        load();
+    }
 
+    public void load() {
+        if (announcementManager != null) {
+            announcementManager.stopScheduler();
+        }
         config = loadConfig("config");
         announcementsConfig = loadConfig("announcements");
         announcementManager = new AnnouncementManager(this, config, announcementsConfig);
+    }
+
+    public void unload() {
+        announcementManager.stopScheduler();
+    }
+
+    public void reload() {
+        unload();
+        load();
     }
 
     public AnnouncementManager getAnnouncementManager() {

@@ -6,3 +6,7 @@ commands:
   announce:
     description: Force announcement
     permission: bungeecord.command.announce
+  proxyannouncements:
+    description: Force announcement
+    permission: bungeecord.command.proxyannouncements
+    aliases: [ "announcements" ]
