@@ -23,13 +23,6 @@ public class Announcement {
     }
 
     public Announcement(ProxyServer proxyServer, String name, Configuration configuration) {
-        /*
-        configuration.contains("title") ? proxyServer.createTitle().title(new TextComponent(Utils.colorize(configuration.getString("title.title"))))
-                        .subTitle(new TextComponent(Utils.colorize(configuration.getString("title.subtitle"))))
-                        .fadeIn(configuration.getInt("title.fadein"))
-                        .fadeOut(configuration.getInt("title.fadeout"))
-                        .stay(configuration.getInt("title.duration")) : null
-         */
         this(name,
                 configuration.getStringList("lines"),
                 configuration.contains("actionbar") ? configuration.getString("actionbar") : null,
