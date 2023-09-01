@@ -4,7 +4,6 @@ import me.math3w.proxyannouncements.utils.Utils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.Title;
-import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.config.Configuration;
 
@@ -34,8 +33,8 @@ public class Announcement {
         this(name,
                 configuration.getStringList("lines"),
                 configuration.contains("actionbar") ? configuration.getString("actionbar") : null,
-                configuration.contains("title") ? proxyServer.createTitle().title(new TextComponent(Utils.colorize(configuration.getString("title.title"))))
-                        .subTitle(new TextComponent(Utils.colorize(configuration.getString("title.subtitle"))))
+                configuration.contains("title") ? proxyServer.createTitle().title(Utils.colorize(configuration.getString("title.title")))
+                        .subTitle(Utils.colorize(configuration.getString("title.subtitle")))
                         .fadeIn(configuration.getInt("title.fadein"))
                         .fadeOut(configuration.getInt("title.fadeout"))
                         .stay(configuration.getInt("title.duration")) : null);
@@ -43,12 +42,11 @@ public class Announcement {
 
     public void sendAnnouncement(ProxiedPlayer player) {
         for (String line : lines) {
-            String colorizedLine = Utils.colorize(line);
-            player.sendMessage(colorizedLine);
+            player.sendMessage(Utils.colorize(line));
         }
 
         if (actionbar != null) {
-            player.sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Utils.colorize(actionbar)));
+            player.sendMessage(ChatMessageType.ACTION_BAR, Utils.colorize(actionbar));
         }
 
         if (title != null) {

@@ -9,6 +9,7 @@ Simple announcements that can be sent across all of your servers within the prox
 - Customizable announcement action bar
 - Customizable announcement title
 - Filter servers that announcements will be sent to
+- HEX colors
 
 ## Commands
 
@@ -36,7 +37,7 @@ servers:
 test1:
   # Content of announcement
   lines:
-    - "&7Proxy Announcement 1"
+    - "#FFFF00Proxy Announcement 1"
 test2:
   # Content of announcement
   lines:
