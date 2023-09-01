@@ -40,7 +40,7 @@ public class AnnouncementManager {
     public AnnouncementManager(ProxyAnnouncements proxyAnnouncements, Configuration configuration, Configuration announcementsConfiguration) {
         this(proxyAnnouncements,
                 announcementsConfiguration.getKeys().stream()
-                        .map(announcementName -> new Announcement(announcementName, announcementsConfiguration.getSection(announcementName)))
+                        .map(announcementName -> new Announcement(proxyAnnouncements.getProxy(), announcementName, announcementsConfiguration.getSection(announcementName)))
                         .toList(),
                 configuration.getInt("interval"),
                 configuration.getBoolean("random"),
